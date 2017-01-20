@@ -60,7 +60,7 @@ public class ListaDobleEnl
 		}
 		return salida;
 	}
-	/*fin a inicio
+	
 	public String mostrarlistardefininicio(){
 		String salida="";
 		if(!estaVacia()){
@@ -72,77 +72,112 @@ public class ListaDobleEnl
 			}
 		}
 		return salida;
-	}*/
+	}
 	
 	
 	
-	public void eliminar(String entrada)
-	{
-		Nodo actual;
-		boolean encontrado= false;
-		actual = inicio;
-		
-		while((actual != null)&& (!encontrado)) 
-		{
-			encontrado = (actual.getDato()== entrada);
-			if(!encontrado)
-				actual=actual.despues;
-		}
-		
-		if(actual !=null)
-		{
-			if(actual== inicio)
-				{
-					inicio=actual.despues;
-					if(actual.despues != null)
-						actual.despues.atras = null;
+	
+	public Nodo buscarporDato(String dato){
+		Nodo aux=inicio;
+		if (estaVacia()){
+			return null;
+			}
+		else {
+		while(aux!=null){
+			
+			if( aux.getDato().equalsIgnoreCase(dato)){
+				return aux;
 				}
+			aux=aux.getDespues();
+			}
+		
 		}
-		else if ( actual.despues != null) // no es el ultimo nodo
-		{
-			actual.atras.despues = actual.despues;
-			actual.despues.atras = actual.atras;
-		}
-		else // ultimo nodo
-		{
-			actual.atras.despues = null;
-			actual =null;
+		return null;		
+	}
+public Nodo buscarporIndice(int indice){
+		
+		Nodo aux=inicio;
+		int cont=0;
+		
+		if (estaVacia()){
+			return null;}
+		else {
+		while(aux!=null){
+			cont++;
+			if (cont==indice){
+				return aux;}
+			else {
+				aux=aux.getDespues();}
+					}
+		return null;			
 		}
 	}
 	
-	/*             public void buscar(Integer valor){
-                        if (inicio != null){
-                                   NodoDoble aux = inicio;
-                                  
-                                   int cont = 0;
-                                   while (aux != null){
-                                               if (aux.getDato() == valor ){
-                                                           cont++;
-                                                           aux = aux.getSiguiente();
-                                                          
-                                               }
-                                  
-                                   }                                      
-                       
-                        }
-                       
-                        }
-           
-*/
-	
-	public void buscarElmento( String dato)
+
+	public void EliminarPorIndice(ListaDobleEnl lista,int dato)
 	{
-		if( inicio != null)
+		if (lista.buscarporIndice(dato)!=null)
 		{
-			Nodo auxiliar = inicio;
-			int contador=0;
+			Nodo eliminar; //nodo auxiliar
+			eliminar= lista.buscarporIndice(dato);
 			
-			while ( auxiliar != null)
+			//enlaces 
+			Nodo p=eliminar.getAtras(); // enlace
+			Nodo q=eliminar.getDespues();
+			
+			if (p==null)
+			{	
+			q.setAtras(null);
+			inicio=q;
+			
+			}
+			else
 			{
-				if (auxiliar.getDato() == dato)
+				if(q==null)
+				{  
+				p.setDespues(null);
+				fin=p;
+				}
+				else 
 				{
-					contador ++;
-					auxiliar = auxiliar.getDespues();
+				p.setDespues(q);
+				q.setAtras(p);
+				}
+			}
+		}
+		
+		
+	}
+	
+	public void EliminarPorDato(ListaDobleEnl lista, String dato)
+	{
+		
+		if (lista.buscarporDato(dato)!= null)
+		{
+			Nodo eliminar;
+			eliminar= lista.buscarporDato(dato);
+			
+			//enlaces 
+			Nodo p=eliminar.getAtras();
+			Nodo q=eliminar.getDespues();
+			
+			if (p==null)
+			{	
+			q.setAtras(null);
+			inicio=q;
+			
+			}
+			else
+			{
+				if(q==null)
+				{  
+				p.setDespues(null);
+				fin=p;
+				}
+				else 
+				{
+				p.setDespues(q);
+				q.setAtras(p);
 				}
 			}
 		}
