@@ -1,6 +1,7 @@
-package com.epn;
+package strc;
 
-public class Nodo {
+public class Nodo 
+{
 	private String dato;
 	 Nodo atras;
 	 Nodo despues;
@@ -11,6 +12,7 @@ public class Nodo {
 		this.despues = despues;
 		this.atras=atras;
 	}
+	
 	public Nodo(String dato){
 		// cuando no hay nodos
 		//this.dato= dato;
@@ -27,8 +29,6 @@ public class Nodo {
 		this.dato = dato;
 	}
 	
-	
-	
 	public Nodo getAtras() {
 		return atras;
 	}
@@ -41,11 +41,9 @@ public class Nodo {
 	public void setDespues(Nodo despues) {
 		this.despues = despues;
 	}
-	@Override
-	public String toString() {
-		return "Nodo [dato=" + dato;
-	}
 	
 	
-
+	
+	
+	
 }

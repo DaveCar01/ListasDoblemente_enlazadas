@@ -1,6 +1,7 @@
-package com.epn;
+package strc;
 
-public class ListaDobleEnl {
+public class ListaDobleEnl
+{
 	private Nodo inicio;
 	private Nodo fin;
 	public ListaDobleEnl() {
@@ -75,7 +76,77 @@ public class ListaDobleEnl {
 	
 	
 	
+	public void eliminar(String entrada)
+	{
+		Nodo actual;
+		boolean encontrado= false;
+		actual = inicio;
+		
+		while((actual != null)&& (!encontrado)) 
+		{
+			encontrado = (actual.getDato()== entrada);
+			if(!encontrado)
+				actual=actual.despues;
+		}
+		
+		if(actual !=null)
+		{
+			if(actual== inicio)
+				{
+					inicio=actual.despues;
+					if(actual.despues != null)
+						actual.despues.atras = null;
+				}
+		}
+		else if ( actual.despues != null) // no es el ultimo nodo
+		{
+			actual.atras.despues = actual.despues;
+			actual.despues.atras = actual.atras;
+		}
+		else // ultimo nodo
+		{
+			actual.atras.despues = null;
+			actual =null;
+		}
+	}
 	
+	/*             public void buscar(Integer valor){
+                        if (inicio != null){
+                                   NodoDoble aux = inicio;
+                                  
+                                   int cont = 0;
+                                   while (aux != null){
+                                               if (aux.getDato() == valor ){
+                                                           cont++;
+                                                           aux = aux.getSiguiente();
+                                                          
+                                               }
+                                  
+                                   }                                      
+                       
+                        }
+                       
+                        }
+           
+*/
+	
+	public void buscarElmento( String dato)
+	{
+		if( inicio != null)
+		{
+			Nodo auxiliar = inicio;
+			int contador=0;
+			
+			while ( auxiliar != null)
+			{
+				if (auxiliar.getDato() == dato)
+				{
+					contador ++;
+					auxiliar = auxiliar.getDespues();
+				}
+			}
+		}
+	}
 	
 	
 	
